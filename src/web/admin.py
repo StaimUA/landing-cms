@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Block, Skill, TeamMember
+from .models import Block, Skill, TeamMember, Portfolio
 
 
 class TeamMemberInline(admin.TabularInline):
@@ -9,6 +9,11 @@ class TeamMemberInline(admin.TabularInline):
 
 
 class SkillInline(admin.TabularInline):
+    model = Skill
+    extra = 1
+
+
+class PortfolioInline(admin.TabularInline):
     model = Skill
     extra = 1
 
@@ -22,6 +27,7 @@ class BlockAdmin(admin.ModelAdmin):
     inlines = []
     skill_inline = [SkillInline, ]
     team_inline = [TeamMemberInline, ]
+    portfolio_inline = [PortfolioInline, ]
 
 
     def get_inline_instances(self, request, obj=None):
@@ -31,6 +37,8 @@ class BlockAdmin(admin.ModelAdmin):
             inlines = self.skill_inline
         elif obj.team_list.all():
             inlines = self.team_inline
+        elif obj.portfolio_list.all():
+            inlines = self.portfolio_inline
         else:
             inlines = self.inlines
 
@@ -43,3 +51,4 @@ class BlockAdmin(admin.ModelAdmin):
 admin.site.register(Block, BlockAdmin)
 admin.site.register(Skill)
 admin.site.register(TeamMember)
+admin.site.register(Portfolio)

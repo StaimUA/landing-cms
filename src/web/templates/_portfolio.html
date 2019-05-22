@@ -1,0 +1,13 @@
+{% if item_list %}
+    <div class="row">
+        {% for item in item_list %}
+            <div class="portfolio col-md-6 col-sm-6 text-center">
+                <img class="portfolio-img" src="{{ item.img.url }}" width="400" alt="">
+            </div>
+            <div class="portfolio col-md-6 col-sm-6 text-left">
+                <h3 class="portfolio-name">{{ item.name }}</h3>
+                <p>{{ item.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

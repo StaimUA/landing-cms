@@ -56,3 +56,16 @@ class TeamMember(PositionMixin):
 
     def __str__(self):
         return self.name
+
+
+class Portfolio(PositionMixin):
+    block = models.ForeignKey('Block', on_delete=models.SET_NULL, related_name='portfolio_list', blank=True, null=True)
+    name = models.CharField(max_length=32)
+    img = models.FileField(upload_to='portfolio')
+    text = models.TextField(max_length=2048, default='')
+
+    class Meta:
+        ordering = ['position', ]
+
+    def __str__(self):
+        return self.name
