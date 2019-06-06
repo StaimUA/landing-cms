@@ -69,3 +69,17 @@ class Portfolio(PositionMixin):
 
     def __str__(self):
         return self.name
+
+
+class ContactForm(PositionMixin):
+    block = models.ForeignKey('Block', on_delete=models.SET_NULL, related_name='contactform_list', blank=True, null=True)
+    # name = models.CharField(max_length=32, default='')
+    email = models.EmailField()
+    full_name = models.CharField(max_length=100)
+    comment = models.TextField(max_length=2048, default='')
+
+    class Meta:
+        ordering = ['position', ]
+
+    def __str__(self):
+        return self.block.name
